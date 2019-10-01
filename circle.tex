@@ -1203,9 +1203,6 @@ The trace is $p \mapsto \ap{C_{\bn{1},X}}(p) \mapsto
 Applying this trace with $p\defeq\Sloop$ we obtain an additive unit for
 all these types that are equivalent to $\zet$.
 
- 
-
-
 \begin{theorem}
   \label{thm:coveringsofS1}
   \begin{enumerate}
@@ -1289,7 +1286,202 @@ However, there is some redundancy: since $(\sqrt[m]g)^{i+km}=(\sqrt[m]g)^i(\id\t
 In hindsight we can give concrete descriptions of all the symmetries: for $i=0,\dots m-1$, let $(Y,g)\defequi (\zet,s)$, $p\defequi s$, and $q(0,0)\defequi i$.
 
 With respect to the identification of the component of the $m$-fold covering.  The type of coverings of the circle is equivalent to $\sum_{X:\Set}X=X$ and by the above, the \covering being in the component of the $m$-fold cover corresponds to $(X,p)$ being in the component of $\zet/m$.
-  \end{proof}
+\end{proof}
+
+\begin{proof}[Elaboration on the previous proof, only (2)]
+  %% temporary definition
+  \def\blank{{-}}%
+  \def\inv#1{#1^{-1}}%
+  \def\myq{\mathfrak q}%
+  \renewcommand{\trp}[2][\null]{%
+    \ifx#1\null\mathop{\mathit{trp}_{#2}}%
+    \else\mathop{\mathit{trp}_{#1,#2}}%
+    \fi%
+  }%
+  First, let us emphasize that we are interested in
+  the symmetries of $\blank^m$ {\em as a set bundle}, meaning we shall
+  explore $\blank^m =_X \blank^m$ where $X$ is the type
+  $\SetBundle(\Sc)$ (and not $\Sc\to \Sc$). Because $\SetBundle(\Sc)$
+  is a subtype of $\sum_{A:\UU}A\to \Sc$, it is enough to determine
+  the symmetries of $\blank^m$ in this later type. This is unfolded
+  as:
+  \begin{displaymath}
+    D_m \defequi \sum_{g:\Sc = \Sc}\blank^m =_{\Sc \to Sc} \blank^m\ptoe g 
+  \end{displaymath}
+  Recall the equivalence $c: \Sc \to C$ of
+  \cref{thm:S1bysymmetries}. Then the transport along $\etop c$ in the
+  type family $X\mapsto (\Sc=X)$ is an equivalence from $(\Sc = \Sc)$
+  to $(\Sc = C)$. Composing with univalence, we get that $(\Sc=\Sc)$
+  is equivalent to $(\Sc \weq C)$. Following ((need a ref to
+  exercise there)), one ends up with
+  \begin{displaymath}
+    D_m \weq \sum_{t:\Sc \weq C} \blank^mc =_{\Sc\to C} \blank^mt
+  \end{displaymath}
+  For simplicity, denote $F_m$ for the later type. Not too rigorously,
+  the proof will go as follows:
+  \begin{enumerate}[label={\sc Step \arabic*}.]
+  \item We shall describe the elements of $F_m$ as basically tuples
+    $(Y,g,q)$ with $(Y,g)$ in the subtype $C$ of $\sum_{X:\UU}(X=X)$
+    and $q:\bn m\times Z = \bn m\times Y$ such that $q$ satisfies
+    certain propositional equations.
+  \item We shall then give a characterization of these elements
+    $(Y,g,q)$ in the case where $Y$ is $\zet$ and $g$ is $\etop
+    s$. This characterization will give $q$ (viewed as an equivalence)
+    the following form:
+    \begin{displaymath}
+      q_{i,n}: (j,z) \mapsto {\sqrt[m]s}^j(i,n+z)
+    \end{displaymath}
+    In particular, it can be seen that
+    $(\zet,\etop s,q_{i,n}) = (\zet,\etop s,q_{i,0})$ in $F_m$.
+  \item Finally we shall define a map $\myq: \bn m \to F_m$ properly
+    as $i\mapsto (\zet,\etop s,q_{i,0})$ and prove that it is an
+    equivalence. Picking an element $(Y,g,q)$ in the codomain, proving
+    the fiber is contractible is a proposition, so that we can assume
+    that $(Y,g)$ is equal to $(\zet,\etop s)$ (and not just merely
+    equal). This element in $(Y,g)=(\zet,\etop s)$ allows us to craft
+    an element in $(Y,g,q) = (\zet, \etop s, q')$ for some $q'$. This
+    $q'$ is recognized through step 2 to be of the form $q_{i,n}$ for
+    some $(i,n)$. Incidentally, it make $(Y,q,g)$ equal with $\myq i$
+    providing a center of contraction $i$ in the fiber.
+  \end{enumerate}
+
+  {\sc Step 1.} An element of $F_m$ is given by a map $t:\Sc \to C$
+  together with a term $!:\isEq(t)$ and a proof
+  $Q: \blank^mt = \blank^mc$. Now such a $t$ can be reduced by
+  $\Sc$-induction to the data of $t(\base)\defequi (Y,g,!)$ and
+  $t(\Sloop)=(p,!,!): (Y,g,!) =_C (Y,g,!)$. Under identification by
+  $\Sc$-induction, $\blank^mc$ is given by
+  \begin{displaymath}
+    \begin{split}
+      &\blank^mc(\base) \defequi (\bn m\times \zet,\sqrt[m] {\etop s},!)\\
+      &\blank^mc(\Sloop) \defis (\id \times {\etop s},!,!): (\bn
+      m\times \zet,\sqrt[m] {\etop s},!) =_C (\bn m\times
+      \zet,\sqrt[m] {\etop s},!)
+    \end{split}
+  \end{displaymath}
+  and similarly $\blank^mt$ is given by
+  \begin{displaymath}
+    \begin{split}
+      &\blank^mt(\base) \defequi (\bn m\times Y,\sqrt[m] g,!)\\
+      &\blank^mt(\Sloop) \defis (\id \times p,!,!): (\bn m\times
+      Y,\sqrt[m] g,!) =_C (\bn m\times Y,\sqrt[m] g,!)
+    \end{split}
+  \end{displaymath}
+  By function extensionality and $\Sc$-induction again, $Q$ becomes
+  then a term $q:m\times \zet = m\times Y$ such that the two following
+  propositions hold:
+  \begin{displaymath}
+    {\sqrt[m]g} q = q \sqrt[m]{\etop s}%
+    \quad\text{and}\quad
+    q \circ (\id \times {\etop s}) = (\id \times p) \circ q.
+  \end{displaymath}
+  Remark that repeated applications of the first equation imply that
+  such a $q$ is completely determined by
+  $\ptoe q (0,0): \bn m\times Y$: indeed for all $j\in\bn m$ and
+  $z\in\zet$
+  \begin{displaymath}
+    \ptoe q (j,z) = \ptoe q ( \sqrt[m]s^{j+nm} (0,0))%
+    = \sqrt[m]g^{j+zm} \ptoe q(0,0)%
+  \end{displaymath}
+  Remark also for future reference that the proposition $p=g$ holds:
+  indeed,
+  \begin{displaymath}
+    \id \times p = q \circ (\id \times {\etop s}) \circ q^{-1}
+    = (q\sqrt[m]{\etop s}q^{-1})^m = (\sqrt[m]g)^n = \id \times g.
+  \end{displaymath}
+  
+  {\sc Step 2.} In particular, when $t$ is actually $c$, then $Y$ is $\zet$, and $g$
+  and $p$ are both $\etop s$. Define then for each pair
+  $(i,n)\in\bn m \times \zet$ a function
+  $q_{i,n}:\bn m\times\zet \to \bn m\times\zet$ as follows:
+  \begin{displaymath}
+    (j,z) \mapsto \sqrt[m]s^{j+zm}(i,n)%
+  \end{displaymath}
+  Such a $q_{i,n}$ is an equivalence as it admits $q_{m-i,-n-1}$ as
+  pseudo inverse. Moreover direction computations show easily that the
+  propositions $\sqrt[m] s q_{i,n} = q_{i,n}\sqrt[m] s$ and
+  $q_{i,n} \circ (\id \times s) = (\id \times s) \circ q_{i,n}$ are
+  satisfied. In other words, for each $(i,n):\bn m \times \zet$,
+  $(\zet,\etop s,!)$ together with $q_{i,n}$ yields (through
+  $\Sc$-induction) an element $(c,!,Q_{i,n})$ of $F_m$.
+
+  {\sc Step 3.} Let us then define $\myq: \bn m \to F_m$ by mapping
+  $i \mapsto (c,!,Q_{i,0})$. The claim is that $\myq$ is an
+  equivalence. Let $(t,!,Q)$ be an element of $F_m$ and as before
+  represent $t$ by $\Sc$-induction:
+  \begin{displaymath}
+    \begin{split}
+      &t(\base) \defequi (Y,g,!) : C\\
+      &t(\Sloop) \defis (p,!,!): (Y,g,!) =_C (Y,g,!)
+    \end{split}
+  \end{displaymath}
+  We need to prove that the fiber of $\myq$ at $(t,!,Q)$ is
+  contractible. But $\iscontr(\myq^{-1}(t,!,Q))$ is a proposition, so
+  one might as well assume that the third component $!$ of $(Y,g,!):C$
+  is of the form $\trunc R$ for some $R:(\zet,\etop s) = (Y,g)$. Such
+  a $R$ is given by some $r:Y=\zet$ such that the proposition
+  $r\etop s = g r$ holds. Then an element $(c,!,Q'):F_m$ can be
+  constructed by defining the associated
+  $q':\bn m \times \zet =\bn m \times \zet$ to be
+  $(\id \times r^{-1})q$. Indeed, such a $q'$ verifies that:
+  \begin{displaymath}
+    \begin{split}
+      \sqrt[m] {\etop s} q' &= \sqrt[m]{\etop s} (id\times\inv r) q \\
+      &= (\id \times \inv r) \sqrt[m]{g} q\quad\text{because}\ {\etop s}\inv r = \inv r g \\
+      &= (\id \times \inv r) q \sqrt[m]{\etop s} \\
+      & ~ \\
+      q' (\id\times \etop s) &= (\id\times\inv r) q (\id\times \etop s) \\
+      &= (\id\times\inv r) (\id\times p)q \\
+      &= (\id\times\inv r) (\id\times g)q \quad \text{because}\ p=g \\
+      &= (\id\times \etop s) (\id\times\inv r)q\\
+      &= (\id\times \etop s) q'
+    \end{split}
+  \end{displaymath}
+  The element $Q'$ has been essentially constructed in order for some
+  element of $(c,!,Q')=(t,!,Q)$ to exist, or equivalently for some
+  element $\alpha: (c,Q') = (t,Q)$ to exist. Such an $\alpha$ is a
+  pair $(\alpha_1,\alpha_2)$ with $\alpha_1: c=_{\Sc\to C}t$ and
+  $\alpha_2: \pathover {Q'} T {\alpha_1} Q$, where
+  $T:(\Sc\to C)\to \UU$ is the type family given by
+  $f\mapsto (\blank^mc=\blank^mf)$. By $\Sc$-induction such an
+  $\alpha_1$ is obtained through $R$: indeed it provides an element of
+  $\rho: (Z,\etop s,!)=_C(Y,g,!)$ (because $r\etop s = g r$) and,
+  taking into account that $p=g$, one also gets $r\etop s = p r$ which
+  is equivalent to the proposition $\pathover \rho {} {\Sloop} \rho$.
+  It remains to find $\alpha_2: \trp[T]\rho Q' = Q$. Using
+  $\Sc$-induction, only the first component of $Q$ is non
+  propositional so it is equivalent to proving $\trp[T']r q' = q$
+  where $T': \UU \to \UU$ is the type family
+  $W \mapsto {(\bn m\times\zet = \bn m\times W)}$. So in the end one need
+  to prove $(\id \times r)q' = q$, which holds by the very definition
+  of $q'$.
+  
+  Moreover, by the analysis in step 2, $Q'$ is equal to $Q_{i,n}$ for
+  some $i$ and $n$. Now remark that there is a pathover in
+  $\pathover {Q_{i,0}} {T} {\sigma_n} {Q_{i,n}}$ where
+  $\sigma_n: c=_{\Sc\to C}c$ comes, by $\Sc$-induction, from
+  $\etop s^n:\zet=\zet$. Indeed, all we need to provide is an element
+  of $\trp[T']{\etop s^n} q_{i,0} = q_{i,n}$. The left hand side is
+  equal to $(\id \times \etop s^n)q_{i,0}$, and the result follows
+  once we recognize that $(\id\times s^n) = \sqrt[m]{\etop
+    s}^{nm}$. This gives a path $\beta:(c,Q_{i,0})=(c,Q_{i,n})$ that
+  we can compose with the path $\alpha$ of the previous paragraph to
+  end up with an element $\alpha\cdot\beta:(c,Q_{i,0})=(t,Q)$, or
+  equivalently a element of $(c,!,Q_{i,0}) =_{F_m} (t,!,Q)$.
+
+  Summing up what we have done in step 3 until now, we have found an
+  element $i$ in the fiber of $\myq$ at $(t,!,Q)$. It remains to show
+  that this $i$ is a center of contraction. But this is easily done as
+  any other $i'$ in the fiber will provide in particular a path
+  $\gamma: (c,Q_{i,0})=(c,Q_{i',0})$. Then looking at the induced
+  path, denoted again $\gamma$, between $\ptoe q_{i,0}$ and
+  $\ptoe q_{i',0}$, we end up with:
+  \begin{displaymath}
+    (i,0) = \ptoe q_{i,0}(0,0) = \ptoe q_{i',0}(0,0) = (i',0). 
+  \end{displaymath}
+  It proves in particular $i=i'$ which concludes the proof of
+  contractibility of the fiber of $\myq$ at $(t,!,Q)$.
+\end{proof}
 
   \begin{remark}
     Regarding the symmetries of the $m$-fold \covering of the circle, recall the picture we tried to evoke in \cref{rem:finitecoveringsofS1}.  How can I move my circle with $m$ evenly spaced marked points  (which we now call $0,1,\dots, m-1$ instead of $1,2,\dots 12$ since it fits better with future applications) without disturbing the projection down to the circle (sending all the marked points to $0$).  I can move the marked points, but a marked point has to be sent to a marked point (otherwise the projection down to the circle would be disturbed).  Let's say that mark $0$ is sent to mark $4$.  However, since we have to preserve the projection down to the circle, the arc from $0$ to $1$ must then be sent to the arc from $4$ to $5$.  Continuing in this fashion, we see that we describe a certain rotation of the circle.  Varying $4$ between $0$ and $m-1$ we see that there are exactly $m$ different symmetries of the $m$-fold \covering.  Furthemore they are all rotations of the circle by an angle which is a multiple of $2\pi/m$.
