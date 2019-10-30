@@ -875,6 +875,21 @@ We will pin this groupoid down by first identifying the components
 (of which there turns out to be one for each natural number), 
 and then analyzing one component at a time.
 
+\begin{remark}
+  From now on, we shall forgo some rigour and use equalities between
+  types and equivalences alike, going back and forth the family of
+  maps $\cast_{X,Y}$ implicitly. What we loose in mathematical rigour,
+  we gain it back in readability and ease of usage. To be a little
+  more precise, given an equivalence $f:A\to B$, we shall freely use
+  $f:A=B$ instead of the more rigorous $\etop f$. And conversely,
+  given a path $p:A=B$, we shall feel free to write terms as $p(a):B$
+  for some $a:A$ instead of the more rigourous $\ptoe p (a)$. Of
+  course, we must restrain this convention to contexts where such $f$
+  and $p$ only matters up to propositional equality. For any situation
+  where such $f$ and $p$ need tobe defined up to definitional
+  equality, we shall go back to the fully rigourous setting.
+\end{remark}
+
 Recall the function $c:\Sc\to C$ of \cref{def:S1toC}. 
 By \cref{thm:S1bysymmetries} we know that $c$ is an equivalence, 
 so classifying \coverings over $\Sc$ is equivalent to 
@@ -1319,7 +1334,7 @@ With respect to the identification of the component of the $m$-fold covering.  T
   % (and not $\Sc\to \Sc$)
   Because $\SetBundle(\Sc)$ is a subtype of $\sum_{A:\UU}A\to \Sc$, it
   is enough to determine the symmetries of $(\Sc,\blank^m)$ in this later
-  type (cf.\ \cref{eq-subtype}). This is unfolded as:
+  type (cf.\ \cref{lem:subtype-eq-=}). This is unfolded as:
   \begin{displaymath}
     D_m \defequi \sum_{g:\Sc = \Sc}\blank^m =_{\Sc \to \Sc} \blank^m\ptoe g 
   \end{displaymath}
@@ -1462,8 +1477,8 @@ With respect to the identification of the component of the $m$-fold covering.  T
   $F_m\mono \overline{F_m}$, then the contractibility of the fiber of
   $\myq$ at a point $(t,!,Q):F_m$, is equivalent to the
   contractibility of the fiber of $\iota\circ\myq$ at
-  $(t,Q):\overline{F_m}$.  In other words, one need to provide, for
-  every $t:\Sc \to C$, an element of:
+  $(t,Q):\overline{F_m}$ (by \cref{lem:subtype-eq-=}).  In other
+  words, one need to provide, for every $t:\Sc \to C$, an element of:
   \begin{displaymath}
     \prod_{Q:(\blank^mc=\blank^mt)} \iscontr(\inv {(\iota \myq)} (t,Q)) 
   \end{displaymath}
