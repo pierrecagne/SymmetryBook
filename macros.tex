@@ -1,7 +1,12 @@
 %% packages
-\usepackage{amssymb,amsthm}
+\RequirePackage{luatex85}% lualatex compatibility
+\usepackage{fontspec}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colon=literal]{unicode-math}
+\usepackage{polyglossia}
 \usepackage[numbers]{natbib}
 \usepackage{mathtools}          %to get \vcentcolon
+\usepackage{etoolbox}
 \usepackage{thmtools}
 \usepackage{letltxmacro}        %to rename \equiv
 \LetLtxMacro{\oldequiv}{\equiv}
@@ -11,6 +16,17 @@
 \pgfplotsset{compat=newest}
 %\usepackage{soul} % for striking out, can be removed in the end
 \usepackage{enumitem}
+
+\setmainfont{Linux Libertine O}[Ligatures={TeX,Common}]%
+\setsansfont{Roboto Light}[Scale=MatchLowercase,BoldFont=Roboto
+Medium]%
+\setmonofont{Ubuntu Mono}[Scale=MatchLowercase]%
+\setmathfont{Libertinus Math Regular}%[Scale=MatchLowercase]%
+\setmathfont{TeX Gyre Pagella Math}[range={\mathfrak,\rightleftarrows,\rightsquigarrow}]%
+
+\newfontfamily\custommathsffont{Lato Regular}[Scale=MatchLowercase,NFSSFamily=custommathsf]
+\DeclareMathAlphabet{\mymathsf}{\encodingdefault}{custommathsf}{m}{n}
+%\DeclareMathAlphabet{\mathit}{\encodingdefault}{\familydefault}{m}{it}
 
 \usetikzlibrary{decorations.markings,decorations.pathreplacing,matrix,arrows,chains,positioning,scopes} 
         %,hobby} % for hobby splines
@@ -85,7 +101,7 @@
 \newcommand{\yes}{\mathop{\mathit{yes}}}
 \newcommand{\no}{\mathop{\mathit{no}}}
 \newcommand{\set}[1]{\{#1\}}
-\newcommand{\refl}[1]{\mathop{{\it refl}_{#1}}}
+\newcommand{\refl}[1]{\mathop{{\mathit{refl}}_{#1}}}
 \newcommand{\refloi}[1]{\mathop{\mathit{refl}^{-o}_{#1}}}
 \newcommand{\inl}[1]{\mathop{{\it inl}_{#1}}}
 \newcommand{\inr}[1]{\mathop{{\it inr}_{#1}}}
@@ -140,12 +156,14 @@
 \newcommand{\cp}[1]{\mathit{cp}_{#1}}
 \newcommand*{\dblslash}{\mathbin{/\kern-3pt/}}
 
-\renewcommand{\equiv}{\simeq}
+%\renewcommand{\equiv}{\simeq}
 \newcommand{\liff}{\equiv}
-\newcommand{\jdeq}{\oldequiv}
-\newcommand{\defeq}{\vcentcolon\jdeq}
+\newcommand{\jdeq}{\equiv}
+\newcommand{\defeq}{\mathrel{\hbox{:}\mkern-5mu\equiv}}
+%\newcommand{\defeq}{\vcentcolon\jdeq}
 \newcommand{\defequi}{\defeq}%definitionally equal}
-\newcommand{\defis}{\vcentcolon=}
+% \newcommand{\defis}{\vcentcolon=}
+\newcommand{\defis}{\mathrel{\hbox{:}\mkern-5mu=}}
 
 \DeclareMathOperator\Aut{Aut}
 \DeclareMathOperator\Out{Out}
@@ -217,7 +235,7 @@
 \newcommand{\princ}[1]{\mathrm{Pr}_{{#1}}}%{\mathrm{Princ}}
 \newcommand{\pathsp}[1]{\mathrm{P}_{#1}}
 \DeclareMathOperator\abstrOp{abst}
-\newcommand{\abstr}{\mathrm{abs}}
+\newcommand{\abstr}{{\mathrm{abs}}}
 \newcommand{\Ad}{\mathrm{Ad}}
 \newcommand{\agp}[1]{\mathcal #1}%generic abstract group
 
@@ -237,8 +255,8 @@
 \newcommand{\typesubgroup}{\mathbf{Sub}}%"gp" removed - is evident from the type of the subscript G
 \newcommand{\typeset}{\Set}
 \newcommand{\typeinftygp}{{\infty}\mathbf{Group}}
-\newcommand{\UU}{\mathcal{U}}
-\newcommand{\UUp}{\UU_*}
+\newcommand{\UU}{{\mathcal U}}
+\newcommand{\UUp}{{\UU_*}}
 \newcommand{\pttype}{\UUp}
 \newcommand{\typeabsgp}{\mathbf{Group}_{\mathrm{Abstract}}}
 \newcommand{\typemonoid}{\mathbf{Monoid}}
@@ -248,10 +266,12 @@
 \newcommand{\twist}{\mathit{twist}}%loop in BC_2
 \newcommand{\Sc}{{S^1}}%the circle
 %\newcommand{\sbt}{\begin{picture}(-1,1)(-1,-3)\circle*{2}\end{picture}}%
-\newcommand{\sbt}{\tikz[anchor=base,baseline]{\node[scale=.7,inner
-    sep=0, outer sep=0, circle]%
-    {$\bullet$};}}%
-\newcommand{\base}{{\sbt}}%point in circle
+% \newcommand{\sbt}{\tikz[anchor=base,baseline]{\node[scale=.7,inner
+%     sep=0, outer sep=0, circle]%
+%     {$\bullet$};}}%
+\newcommand{\sbt}{\tikz[anchor=base,baseline]{\node[inner sep=.3ex] (0,.7ex) {$\bullet$};}}
+\newcommand{\base}{{\mathord{\sbt}}}%point in circle
+% \newcommand{\base}{{\sbt}}%point in circle
 \newcommand{\uc}[1]{{I_{#1}}}%universal set bundle
 \newcommand{\Zloop}{\circlearrowleft} %was \mathrm{loop}}%MAB: loop TorZor
 \newcommand{\Sloop}{\circlearrowleft}%loop in circle
@@ -262,7 +282,7 @@
 \newcommand{\ptoe}[1]{\tilde {#1}}
 \newcommand{\cast}{\mathrm{cast}}
 \newcommand{\ua}{\mathrm{ua}}%univalence inverse
-\newcommand{\zet}{\mathrm{Z}}%the SET of integers
+\newcommand{\zet}{{\mathrm Z}}%the SET of integers
 
 \newcommand{\cst}[1]{\operatorname{\mathit{c}}_{#1}}%
 \newcommand{\weqto}{\xrightarrow{\sim}}%
@@ -284,15 +304,15 @@
 
 %% Euclidean geometry
 
-\newcommand\EE{\mathbb E}
-\newcommand\VV{\mathbb V}
+\newcommand\EE{{\mathbb E}}
+\newcommand\VV{{\mathbb V}}
 \newcommand\ES{{\tilde \EE}}
 \newcommand\OS{{\tilde \VV}}
 \newcommand\OrthGp[1]{\mathrm O(#1)}
 \newcommand\EucGp[1]{\mathrm E(#1)}
 \DeclareMathOperator\Vectors{Vec}
 \DeclareMathOperator\Points{Pts}
-\newcommand{\typeRealVectorSpace}{\mathbf{Vect}_\RR}
+\newcommand{\typeRealVectorSpace}{\mathbf{Vect}_{\RR}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

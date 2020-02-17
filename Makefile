@@ -1,9 +1,9 @@
 all: book.pdf TAGS
-book.pdf:always; latexmk -pdf book
+book.pdf:always; latexmk -lualatex -pdf book
 always:
 clean:; rm -f *.aux *.fdb_latexmk *.fls *.log *.out *.toc *.brf *.blg *.bbl
 veryclean:clean; rm -f *.pdf
-ZTors.pdf:always; latexmk -pdf ZTors
+ZTors.pdf:always; latexmk -lualatex -pdf ZTors
 
 BOOKFILES :=						\
 	book.tex					\
